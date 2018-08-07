@@ -6,20 +6,12 @@ SignNow Python SDK
 About SignNow
 -------------
 
-SignNow by Barracuda is an eSigning platform that offers a cloud
-version, a physical appliance and also a virtual appliance. Backed by
-Barracuda’s industry-leading security infrastructure, SignNow is fully
-compliant with eSigning laws and encrypts all data in transit. Users can
-share, manage and access their documents with confidence. It’s never
-been easier to get legally binding signatures from customers, partners,
-and employees - in seconds using any device.
+SignNow is a powerful web-based e-signature solution that streamlines the signing process and overall document flow for businesses of any size. SignNow offers SaaS as well as public and private cloud deployment options using the same underlying API. With SignNow you can easily sign, share and manage documents in compliance with international data laws and industry-specific regulations. SignNow enables you to collect signatures from partners, employees and customers from any device within minutes. 
 
 API Contact Information
 -----------------------
 
-If you have questions about the SignNow API, please visit
-https://campus.barracuda.com/product/signnow/article/CudaSign/RestEndpointsAPI/
-or email api@signnow.com.
+If you have questions about the SignNow API, please visit [https://help.signnow.com/docs](https://help.signnow.com/docs) or email [api@signnow.com](mailto:api@signnow.com).
 
 See additional contact information at the bottom.
 
@@ -28,7 +20,7 @@ Installation
 
 To install to Python library:
 
-Download the signnow library and extract it into the loaction of your
+Download the signnow library and extract it into the location of your
 choice.
 
 Navigate to the extracted file and run the following:
@@ -49,10 +41,7 @@ Setup
 Examples
 ========
 
-To run the examples you will need an API key. You can get one here
-https://signnow.com/l/api/request_information. For a full list of
-accepted parameters, refer to the CudaSign REST Endpoints API guide:
-https://campus.barracuda.com/product/signnow/article/CudaSign/RestEndpointsAPI/.
+To run the examples you will need an API key. You can get one here [https://www.signnow.com/api](https://www.signnow.com/api). For a full list of accepted parameters, refer to the SignNow REST Endpoints API guide: [https://help.signnow.com/docs](https://help.signnow.com/docs).
 
 OAuth2
 ======
@@ -355,10 +344,9 @@ Additional Contact Information
 SUPPORT
 -------
 
-https://university.cudasign.com/.
+To contact SignNow support, please email [support@signnow.com](mailto:support@signnow.com).
 
 SALES
 -----
 
-For pricing information, please call (800) 831-2050 or email
-sales@signnow.com.
+For pricing information please call (800) 831-2050 or email [sales@signnow.com](mailto:sales@signnow.com).
