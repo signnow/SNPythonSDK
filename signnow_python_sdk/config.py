@@ -1,4 +1,5 @@
 from base64 import b64encode
+import unirest
 
 CLIENT_ID = ''
 CLIENT_SECRET = ''
@@ -24,6 +25,8 @@ class Config(object):
                 CLIENT_SECRET = kwargs['client_secret']
             if 'base_url' in kwargs:
                 BASE_URL = kwargs['base_url']
+            if 'timeout' in kwargs:
+                unirest.timeout(kwargs['timeout'])
         else:
             self.client_id = CLIENT_ID
             self.client_secret = CLIENT_SECRET
