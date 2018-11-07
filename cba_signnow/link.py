@@ -4,9 +4,8 @@ from json import dumps
 
 
 class Link(object):
-
     @staticmethod
-    def create(access_token, document_id):
+    def create(access_token, document_id, _params=dict()):
         """Creates shortened signing link urls that can be clicked be opened in a browser to sign the document
 
         Args:
@@ -16,12 +15,16 @@ class Link(object):
         Returns:
             dict: A dictionary representing the JSON response containing the signing links for the document.
         """
-        response = post(Config().get_base_url() + '/link', headers={
-            "Authorization": "Bearer " + access_token,
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        }, params=dumps({
-            "document_id": document_id
-        }))
+        params = {"document_id": document_id}
+        params.update(_params)
+        response = post(
+            Config().get_base_url() + "/link",
+            headers={
+                "Authorization": "Bearer " + access_token,
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            params=dumps(params),
+        )
 
         return response.body

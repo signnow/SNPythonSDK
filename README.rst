@@ -1,19 +1,11 @@
-SignNow
-=======
+FORKED SIGNNOW SDK 
 
-SignNow Python SDK
+See below for original SignNow sdk readme. This fork is a slightly altered version that I use. This is not maintained by the SignNow team. 
 
 About SignNow
 -------------
 
 SignNow is a powerful web-based e-signature solution that streamlines the signing process and overall document flow for businesses of any size. SignNow offers SaaS as well as public and private cloud deployment options using the same underlying API. With SignNow you can easily sign, share and manage documents in compliance with international data laws and industry-specific regulations. SignNow enables you to collect signatures from partners, employees and customers from any device within minutes. 
-
-API Contact Information
------------------------
-
-If you have questions about the SignNow API, please visit [https://help.signnow.com/docs](https://help.signnow.com/docs) or email [api@signnow.com](mailto:api@signnow.com).
-
-See additional contact information at the bottom.
 
 Installation
 ============
