@@ -36,7 +36,11 @@ Setup
 
     import signnow_python_sdk
 
-    signnow_python_sdk.Config(client_id="YOUR_CLIENT_ID", client_secret="YOUR_CLIENT_SECRET", base_url="https://api-eval.signnow.com")
+    signnow_python_sdk.Config(client_id="YOUR_CLIENT_ID", client_secret="YOUR_CLIENT_SECRET", environment="production")
+    
+    Environments: 
+          production - https://api.signnow.com
+          eval - https://api-eval.signnow.com
 
 Examples
 ========
@@ -337,6 +341,10 @@ Create Link
 .. code:: python
 
     create_link_res = signnow_python_sdk.Link.create(access_token, "YOUR DOCUMENT ID");
+
+## License
+
+This project is released under the MIT [License](https://github.com/signnow/SNPythonSDK/blob/master/LICENSE.md).
 
 Additional Contact Information
 ==============================
