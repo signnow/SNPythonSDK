@@ -1,6 +1,7 @@
-from unirest import post
-from config import Config
-from json import dumps
+from requests import post
+from signnow_python_sdk.config import Config
+from json import dumps, loads
+
 
 
 class Link(object):
@@ -20,8 +21,7 @@ class Link(object):
             "Authorization": "Bearer " + access_token,
             "Content-Type": "application/json",
             "Accept": "application/json"
-        }, params=dumps({
+        }, data=dumps({
             "document_id": document_id
         }))
-
-        return response.body
+        return loads(response.content)

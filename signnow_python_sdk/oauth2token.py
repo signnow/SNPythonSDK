@@ -1,5 +1,6 @@
-from unirest import get, post
-from config import Config
+from requests import get, post
+from signnow_python_sdk.config import Config
+import json
 
 class OAuth2(object):
 
@@ -17,7 +18,7 @@ class OAuth2(object):
             or the error returned.
         """
         OAUTH2_TOKEN_URL = Config().get_base_url() + '/oauth2/token'
-        request = post(OAUTH2_TOKEN_URL, params={
+        request = post(OAUTH2_TOKEN_URL, data={
             "username": username,
             "password": password,
             "grant_type": "password",
@@ -28,7 +29,7 @@ class OAuth2(object):
             "Content-Type": "application/x-www-form-urlencoded"
         })
 
-        return request.body
+        return json.loads(request.content)
 
     @staticmethod
     def verify(access_token=None):

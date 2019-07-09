@@ -1,5 +1,6 @@
-from unirest import get
-from config import Config
+from requests import get
+from signnow_python_sdk.config import Config
+import json
 
 
 class Folder(object):
@@ -20,7 +21,7 @@ class Folder(object):
             "Accept": "application/json"
         })
 
-        return response.body
+        return json.loads(response.content)
 
     @staticmethod
     def get(access_token, folder_id, number_of_documents=20, offset=0, filter_object={}, sort_object={}):
@@ -54,4 +55,4 @@ class Folder(object):
             "Accept": "application/json"
         })
 
-        return response.body
+        return json.loads(response.content)

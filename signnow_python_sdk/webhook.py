@@ -1,6 +1,6 @@
-from unirest import get, post, delete
-from config import Config
-from json import dumps
+from requests import get, post, delete
+from signnow_python_sdk.config import Config
+from json import dumps,loads
 
 
 class Webhook(object):
@@ -20,7 +20,7 @@ class Webhook(object):
             "Accept": "application/json"
         })
 
-        return response.body
+        return loads(response.content)
 
     @staticmethod
     def create(access_token, event, callback_url):
@@ -38,12 +38,13 @@ class Webhook(object):
             "Authorization": "Bearer " + access_token,
             "Content-Type": "application/json",
             "Accept": "application/json"
-        }, params = dumps({
+        }, data = dumps({
             "event": event,
             "callback_url": callback_url
         }))
 
-        return response.body
+        print(loads(response.content))
+        return loads(response.content)
 
     @staticmethod
     def delete(access_token, subscription_id):
@@ -61,4 +62,5 @@ class Webhook(object):
             "Accept": "application/json"
         })
 
-        return response.body
+
+        return loads(response.content)

@@ -1,5 +1,5 @@
-from unirest import get, post
-from config import Config
+from requests import get, post
+from signnow_python_sdk.config import Config
 from json import dumps, loads
 
 

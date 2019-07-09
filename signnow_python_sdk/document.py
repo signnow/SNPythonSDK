@@ -1,8 +1,9 @@
-from unirest import get, post, put, delete, timeout
-from config import Config
+from requests import get, post, put, delete
+from signnow_python_sdk.config import Config
 from json import dumps
 from datetime import datetime
 import os
+from json import dumps, loads
 
 
 class Document(object):
@@ -25,7 +26,7 @@ class Document(object):
             "Accept": "application/json"
         })
 
-        return response.body
+        return loads(response.content)
 
     @staticmethod
     def upload(access_token, file_path, field_extract=True):
@@ -40,16 +41,20 @@ class Document(object):
             dict: The JSON response from the API which includes the id of the document uploaded.
                 or the error returned.
         """
-        timeout(60)
+       # timeout(60)
+        print(file_path)
+        #file = {'file': open(file_path, mode="rb", encoding="ISO-8859-1")}
+        file = {'file': open(file_path, mode="rb")}
         response = post(Config().get_base_url() + '/document' , headers={
             "Authorization": "Bearer " + access_token
-        }, params={
-            "file": open(file_path, mode="r"),
+        }, data={
+         #  "file": file,
             "client_timestamp": datetime.now().strftime("%s"),
             "check_fields": field_extract
-        })
+        }, files = file
+        )
 
-        return response.body
+        return loads(response.content)
 
     @staticmethod
     def update(access_token, document_id, data_payload):
@@ -69,9 +74,9 @@ class Document(object):
             "Authorization": "Bearer " + access_token,
             "Content-Type": "application/json",
             "Accept": "application/json"
-        }, params=dumps(data_payload))
+        }, data=dumps(data_payload))
 
-        return response.body
+        return loads(response.content)
 
     @staticmethod
     def download(access_token, document_id, file_name='my-collapsed-document', file_path='', with_history=False):
@@ -99,7 +104,7 @@ class Document(object):
 
         if not os.path.isfile(path):
             new_file = open(path, 'wb+')
-            new_file.write(response.raw_body)
+            new_file.write(response.content)
             new_file.close()
         else:
             file_path, full_file_name = os.path.split(path)
@@ -108,10 +113,10 @@ class Document(object):
             while os.path.exists(file_path + '/' + file_name + '(%s).pdf' % i):
                 i += 1
             new_file = open(file_path + '/' + file_name + '(%s).pdf' % i, 'wb+')
-            new_file.write(response.raw_body)
+            new_file.write(response.content)
             new_file.close()
 
-        return response.raw_body
+        return response.content
 
     @staticmethod
     def delete(access_token, document_id):
@@ -129,7 +134,7 @@ class Document(object):
             "Accept": "application/json"
         })
 
-        return response.body
+        return loads(response.content)
 
     @staticmethod
     def invite(access_token, document_id, invite_payload):
@@ -147,9 +152,9 @@ class Document(object):
             "Authorization": "Bearer " + access_token,
             "Accept": "application/json",
             "Content-Type": "application/json"
-        }, params=dumps(invite_payload))
+        }, data=dumps(invite_payload))
 
-        return response.body
+        return loads(response.content)
 
     @staticmethod
     def cancel_invite(access_token, document_id):
@@ -167,7 +172,7 @@ class Document(object):
             "Accept": "application/json",
         })
 
-        return response.body
+        return loads(response.content)
 
     @staticmethod
     def download_link(access_token, document_id):
@@ -186,7 +191,7 @@ class Document(object):
             "Content-Type": "application/json"
         })
 
-        return response.body
+        return loads(response.content)
 
     @staticmethod
     def merge_and_download(access_token, document_ids, file_name='my-merged-document', file_path=''):
@@ -202,11 +207,11 @@ class Document(object):
             str or dict: The byte string of the merged document's raw data being returned by the API. If there is an
             error it will return a dictionary with error data.
         """
-        print type(document_ids)
+        print (type(document_ids))
         response = post(Config().get_base_url() + '/document/merge', headers={
             "Authorization": "Bearer " + access_token,
             "Content-Type": "application/json"
-        }, params=dumps({
+        }, data=dumps({
             "name": file_name,
             "document_ids": document_ids
         }))
@@ -218,7 +223,7 @@ class Document(object):
 
         if not os.path.isfile(path):
             new_file = open(path, 'wb+')
-            new_file.write(response.raw_body)
+            new_file.write(response.content)
             new_file.close()
         else:
             file_path, full_file_name = os.path.split(path)
@@ -227,10 +232,10 @@ class Document(object):
             while os.path.exists(file_path + '/' + file_name + '(%s).pdf' % i):
                 i += 1
             new_file = open(file_path + '/' + file_name + '(%s).pdf' % i, 'wb+')
-            new_file.write(response.raw_body)
+            new_file.write(response.content)
             new_file.close()
 
-        return response.raw_body
+        return response.content
 
     @staticmethod
     def get_history(access_token, document_id):
@@ -248,7 +253,7 @@ class Document(object):
             "Accept": "application/json"
         })
 
-        return response.body
+        return loads(response.content)
 
     @staticmethod
     def move(access_token, document_id, folder_id):
@@ -266,8 +271,8 @@ class Document(object):
             "Authorization": "Bearer " + access_token,
             "Accept": "application/json",
             "Content-Type": "application/json"
-        }, params=dumps({
+        }, data=dumps({
             "folder_id": folder_id
         }))
 
-        return response.body
+        return loads(response.content)
