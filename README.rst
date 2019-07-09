@@ -342,7 +342,8 @@ Create Link
 
     create_link_res = signnow_python_sdk.Link.create(access_token, "YOUR DOCUMENT ID");
 
-## License
+LICENSE
+-------
 
 This project is released under the MIT [License](https://github.com/signnow/SNPythonSDK/blob/master/LICENSE.md).
 
