@@ -12,3 +12,6 @@
 
 # Ignore pycharm idea folder.
 /.idea/
+
+# Ignore downloaded documents
+/examples/downloaded_documents/
