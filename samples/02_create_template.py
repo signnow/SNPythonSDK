@@ -71,5 +71,5 @@ if __name__ == '__main__':
         ]
     }
 
-    # Add fields and texts to a document
+    # Add fields and texts to the template
     put_doc_response = signnow_python_sdk.Template.update(access_token['access_token'], template_id['id'], doc_payload)
