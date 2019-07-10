@@ -4,7 +4,7 @@ CLIENT_ID = ''
 CLIENT_SECRET = ''
 BASE_URL = ''
 PRODUCTION_BASE_URL = 'https://api.signnow.com'
-EVAL_BASE_URL = 'https://eval.signnow.com'
+EVAL_BASE_URL = 'https://api-eval.signnow.com'
 
 
 class Config(object):

@@ -2,7 +2,7 @@ import signnow_python_sdk
 import os
 
 if __name__ == '__main__':
-    signnow_python_sdk.Config(client_id="CLIENT_SECRET",
+    signnow_python_sdk.Config(client_id="CLIENT_ID",
                               client_secret="CLIENT_SECRET",
                               environment="production")
 
