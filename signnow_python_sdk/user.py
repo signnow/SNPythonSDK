@@ -29,7 +29,7 @@ class User(object):
             "last_name": last_name
         }))
 
-        return request.body
+        return loads(request.content)
 
     @staticmethod
     def get(access_token):
@@ -47,4 +47,4 @@ class User(object):
             "Accept": "application/json"
         })
 
-        return request.body
+        return loads(request.content)

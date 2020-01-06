@@ -48,4 +48,4 @@ class OAuth2(object):
             "Accept": "application/json"
         })
 
-        return request.body
+        return json.loads(request.content)
