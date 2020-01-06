@@ -22,7 +22,7 @@ class User(object):
             "Authorization": "Basic " + Config().get_encoded_credentials(),
             "Accept": "application/json",
             "Content-Type": "application/json"
-        }, params=dumps({
+        }, data=dumps({
             "email": email,
             "password": password,
             "first_name": first_name,
