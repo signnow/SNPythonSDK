@@ -1,6 +1,6 @@
 from requests import get, post
 from signnow_python_sdk.config import Config
-import json
+from json import dumps,loads
 
 class OAuth2(object):
 
@@ -29,7 +29,7 @@ class OAuth2(object):
             "Content-Type": "application/x-www-form-urlencoded"
         })
 
-        return json.loads(request.content)
+        return loads(request.content)
 
     @staticmethod
     def verify(access_token=None):

@@ -1,6 +1,6 @@
 from requests import get
 from signnow_python_sdk.config import Config
-import json
+from json import dumps,loads
 
 
 class Folder(object):
@@ -21,7 +21,7 @@ class Folder(object):
             "Accept": "application/json"
         })
 
-        return json.loads(response.content)
+        return loads(response.content)
 
     @staticmethod
     def get(access_token, folder_id, number_of_documents=20, offset=0, filter_object={}, sort_object={}):
@@ -55,4 +55,4 @@ class Folder(object):
             "Accept": "application/json"
         })
 
-        return json.loads(response.content)
+        return loads(response.content)
