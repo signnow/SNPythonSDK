@@ -1,6 +1,8 @@
 from requests import get, post, put, delete
 from signnow_python_sdk.config import Config
 from datetime import datetime
+from calendar import timegm
+
 import os
 from json import dumps, loads
 
@@ -48,7 +50,7 @@ class Document(object):
             "Authorization": "Bearer " + access_token
         }, data={
          #  "file": file,
-            "client_timestamp": datetime.now().strftime("%s"),
+            "client_timestamp": timegm(datetime.now().timetuple()),
             "check_fields": field_extract
         }, files = file
         )
