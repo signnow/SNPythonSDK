@@ -20,7 +20,7 @@ Installation
 
 To install to Python library:
 
-Download the signnow library and extract it into the location of your
+Download or clone the SignNow library and extract it into the location of your
 choice.
 
 Navigate to the extracted file and run the following:
