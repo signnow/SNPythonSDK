@@ -176,6 +176,65 @@ class Document(object):
         return loads(response.content)
 
     @staticmethod
+    def embedded_invite(access_token, document_id, invite_payload):
+        """Send an invite for a document via the API
+
+        Args:
+            access_token (str): The access token for the user account that has access to the document.
+            document_id (str): The unique id of the document you want to send an invite for.
+            invite_payload (dict): A dictionary representing the invite payload for sending an invite.
+
+        Returns:
+            dict: The JSON response from the API {u'result': u'success'} or JSON representing an API error.
+        """
+        response = post(Config().get_base_url() + '/v2/documents/' + document_id + '/embedded-invites', headers={
+            "Authorization": "Bearer " + access_token,
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }, data=dumps(invite_payload))
+
+        return loads(response.content)
+
+    @staticmethod
+    def embedded_invite_link(access_token, document_id, field_invite_id, payload):
+        """Send an invite for a document via the API
+
+        Args:
+            access_token (str): The access token for the user account that has access to the document.
+            document_id (str): The unique id of the document you want to send an invite for.
+            field_invite_id (str): The unique id of the field invite you want to get the link for.
+            payload (dict): embedded invite link payload
+
+        Returns:
+            dict: The JSON response from the API {u'result': u'success'} or JSON representing an API error.
+        """
+        response = post(Config().get_base_url() + '/v2/documents/' + document_id + '/embedded-invites/'
+                   + field_invite_id + '/link', headers={
+            "Authorization": "Bearer " + access_token,
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }, data=dumps(payload))
+
+        return loads(response.content)
+
+    @staticmethod
+    def delete_embedded_invite(access_token, document_id):
+        """Delete an embedded invite
+        Args:
+            access_token (str): The access token for the user account that has access to the document.
+            document_id (str): The unique id of the embedded invite document you want to delete.
+
+        Returns:
+            dict: The JSON response from the API {u'result': u'success'} or JSON representing an API error.
+        """
+        response = delete(Config().get_base_url() + '/v2/documents/' + document_id + '/embedded-invites', headers={
+            "Authorization": "Bearer " + access_token,
+            "Accept": "application/json"
+        })
+
+        return str(response.status_code)
+
+    @staticmethod
     def download_link(access_token, document_id):
         """Creates a link that when opened in a browser will allow you to download the document one time.
 
