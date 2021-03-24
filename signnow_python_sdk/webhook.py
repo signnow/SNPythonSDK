@@ -2,7 +2,6 @@ from requests import get, post, delete
 from signnow_python_sdk.config import Config
 from json import dumps, loads
 
-
 class Webhook(object):
 
     @staticmethod
@@ -38,8 +37,6 @@ class Webhook(object):
             "Content-Type": "application/json",
             "Accept": "application/json"
         }, data=dumps(payload))
-
-        print(response)
         return response
 
     @staticmethod
@@ -51,11 +48,11 @@ class Webhook(object):
             subscription_id (str): The unique id of the subscription being deleted.
 
         Returns:
-            dict: The JSON response from the API with the id of the deleted subscription or an API error.
+            dict: The response code from the API with the id of the deleted subscription or an API error.
         """
         response = delete(Config().get_base_url() + '/api/v2/events/' + subscription_id, headers={
             "Authorization": "Bearer " + access_token,
             "Accept": "application/json"
         })
 
-        return loads(response.content)
+        return response

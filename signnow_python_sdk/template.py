@@ -105,7 +105,6 @@ class Template(object):
             dict: A dictionary representing the JSON response which includes the unique id of the document created from
                 the template
         """
-        print(dumps(template_routing_payload))
         response = post(Config().get_base_url() + '/document/' + template_id+ '/template/routing/detail', headers={
             "Authorization": "Bearer " + access_token,
             "Content-Type": "application/json",

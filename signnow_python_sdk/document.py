@@ -42,14 +42,11 @@ class Document(object):
             dict: The JSON response from the API which includes the id of the document uploaded.
                 or the error returned.
         """
-       # timeout(60)
-        print(file_path)
-        #file = {'file': open(file_path, mode="rb", encoding="ISO-8859-1")}
+        # timeout(60)
         file = {'file': open(file_path, mode="rb")}
         response = post(Config().get_base_url() + '/document' , headers={
             "Authorization": "Bearer " + access_token
         }, data={
-         #  "file": file,
             "client_timestamp": timegm(datetime.now().timetuple()),
             "check_fields": field_extract
         }, files = file
@@ -267,7 +264,6 @@ class Document(object):
             str or dict: The byte string of the merged document's raw data being returned by the API. If there is an
             error it will return a dictionary with error data.
         """
-        print (type(document_ids))
         response = post(Config().get_base_url() + '/document/merge', headers={
             "Authorization": "Bearer " + access_token,
             "Content-Type": "application/json"
