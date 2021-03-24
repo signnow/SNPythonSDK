@@ -38,12 +38,20 @@ if __name__ == '__main__':
     # Get document data
     document_data = signnow_python_sdk.Document.get(access_token['access_token'], document_id['id'])
 
+    webhook_payload = {
+        "event": "document.complete",
+        "entity_id": document_id['id'],
+        "action": "callback",
+        "attributes": {
+            "callback": "https://webhook.site/1d9d30fb-b128-418d-975b-612eb5b4bf",
+            "use_tls_12": True,
+        }
+    }
+    # Create webhook to send POST to custom endpoint when document is signed
+    webhook_response = signnow_python_sdk.Webhook.create(access_token['access_token'], webhook_payload)
+
     # Send signature invite
     invite_response = signnow_python_sdk.Document.invite(access_token['access_token'], document_id['id'], invite_payload)
-
-    # Create webhook to send POST to custom endpoint when document is signed
-    webhook_response = signnow_python_sdk.Webhook.create(access_token['access_token'], 'document.complete',
-                                                         "https://webhook.site/1d9d30fb-b128-418d-975b-612eb5b4bf")
 
     dir_path = './downloaded_documents'
     enclose_document_history = False
@@ -61,7 +69,6 @@ if __name__ == '__main__':
            "event": "document.complete",
            "environment": "https://api.signnow.com",
            "callback_url": "https://webhook.site/1d9d30fb-b128-418d-975b-612ebeb5bf",
-           "access_token": "1ef7eb7bdb3a98b494bf210f42118894b119c1a2fcb348f99dd086"
         },
         "content": {
            "document_id": "ce8e7ff332a4d1b820ebd24a065d8111fc0",
