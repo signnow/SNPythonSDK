@@ -7,9 +7,16 @@ setup(name='signnow_python_sdk',
     url = '',
     author = 'SignNow',
     author_email='api@signnow.com',
-    license = 'MIT',
+    license = 'Apache 2.0',
     packages=['signnow_python_sdk'],
     install_requires=[
         'requests',
     ],
-    zip_safe=False)
+    zip_safe=False,
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: Apache Software License",
+        "Operating System :: OS Independent"
+    ],
+    python_requires='>=3.6',
+)

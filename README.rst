@@ -345,7 +345,7 @@ Create Link
 LICENSE
 -------
 
-This project is released under the MIT [License](https://github.com/signnow/SNPythonSDK/blob/master/LICENSE.md).
+This project is released under the Apache 2.0 [License](https://github.com/signnow/SNPythonSDK/blob/master/LICENSE.md).
 
 Additional Contact Information
 ==============================
