@@ -46,9 +46,10 @@ if __name__ == '__main__':
     # Send signature invite
     invite_response = signnow_python_sdk.Document.embedded_invite(access_token['access_token'], doc_id['id'],
                                                                   invite_payload)
-    # Create embedded links for all signature invites
-    for invite_id in invite_response["data"]:
-        embedded_link = signnow_python_sdk.Document.embedded_invite_link(access_token['access_token'], doc_id['id'],
-                                                                         invite_id['id'], link_payload)
+    # Create embedded links for signature invite. Signature invite should be in "pending status".
+    for invite in invite_response["data"]:
+        if invite["status"] == "pending":
+            embedded_link = signnow_python_sdk.Document.embedded_invite_link(access_token['access_token'], doc_id['id'],
+                                                                         invite['id'], link_payload)
     # Delete embedded invite
     signnow_python_sdk.Document.delete_embedded_invite(access_token['access_token'], doc_id['id'])
