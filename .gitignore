@@ -15,3 +15,7 @@
 
 # Ignore downloaded documents
 /examples/downloaded_documents/
+
+# Package build directory
+/build/
+
