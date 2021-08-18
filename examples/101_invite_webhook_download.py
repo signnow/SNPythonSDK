@@ -50,6 +50,9 @@ if __name__ == '__main__':
     # Create webhook to send POST to custom endpoint when document is signed
     webhook_response = signnow_python_sdk.Webhook.create(access_token['access_token'], webhook_payload)
 
+    # List available webhooks
+    list_webhooks = signnow_python_sdk.Webhook.list_all(access_token['access_token'])
+
     # Send signature invite
     invite_response = signnow_python_sdk.Document.invite(access_token['access_token'], document_id['id'], invite_payload)
 

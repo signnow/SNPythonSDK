@@ -15,7 +15,7 @@ class Webhook(object):
             dict: A dictionary representing the JSON data of the event subscriptions or the error returned by the API.
         """
         response = get(Config().get_base_url() + '/api/v2/events', headers={
-            "Authorization": "Bearer " + access_token,
+            "Authorization": "Basic " + Config().get_encoded_credentials(),
             "Accept": "application/json"
         })
 
