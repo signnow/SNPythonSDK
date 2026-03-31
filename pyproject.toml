@@ -1,0 +1,79 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "signnow-python-sdk"
+version = "3.0.0"
+description = "SignNow official Python SDK"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.8"
+authors = [
+    { name = "SignNow", email = "support@signnow.com" },
+]
+keywords = ["signnow", "esignature", "api", "sdk"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "httpx>=0.24.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/signnow/PythonSdk"
+Documentation = "https://docs.signnow.com"
+Repository = "https://github.com/signnow/PythonSdk"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["signnow*"]
+exclude = ["tests*", "examples*"]
+
+[tool.black]
+line-length = 88
+target-version = ["py38"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # default
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203", "W503", "E501"]
+exclude = [".git", "__pycache__", ".venv", "build", "dist"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --strict-markers --tb=short"

@@ -1,0 +1,3 @@
+"""
+Document Invite API module
+"""
