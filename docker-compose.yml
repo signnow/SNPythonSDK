@@ -1,0 +1,120 @@
+version: '3.8'
+
+services:
+  signnow-sdk:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: signnow-python-sdk
+    volumes:
+      # Mount .env file (if exists)
+      - ./.env:/app/.env:ro
+      # Mount downloads directory
+      - ./downloads:/app/downloads
+      # Mount SDK source code for development
+      - ./signnow:/app/signnow
+      # Mount examples for easy access
+      - ./examples:/app/examples
+      # Mount tests
+      - ./tests:/app/tests
+      # Mount setup files
+      - ./setup.py:/app/setup.py
+      - ./requirements.txt:/app/requirements.txt
+      - ./check_setup.py:/app/check_setup.py
+    environment:
+      # Pass environment variables if .env doesn't exist
+      - SIGNNOW_API_HOST=${SIGNNOW_API_HOST:-https://api.signnow.com}
+      - SIGNNOW_API_BASIC_TOKEN=${SIGNNOW_API_BASIC_TOKEN:-}
+      - SIGNNOW_API_USERNAME=${SIGNNOW_API_USERNAME:-}
+      - SIGNNOW_API_PASSWORD=${SIGNNOW_API_PASSWORD:-}
+      - SIGNNOW_DOWNLOADS_DIR=${SIGNNOW_DOWNLOADS_DIR:-./downloads}
+    working_dir: /app
+    # Keep container running for interactive use
+    stdin_open: true
+    tty: true
+    # Default command - interactive shell
+    command: /bin/bash
+
+  # Service to run all examples via run_examples.py
+  run-examples:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: signnow-run-examples
+    volumes:
+      - ./.env:/app/.env:ro
+      - ./downloads:/app/downloads
+      - ./signnow:/app/signnow
+      - ./examples:/app/examples
+      - ./run_examples.py:/app/run_examples.py
+      - ./setup.py:/app/setup.py
+      - ./requirements.txt:/app/requirements.txt
+    environment:
+      - SIGNNOW_API_HOST=${SIGNNOW_API_HOST:-https://api.signnow.com}
+      - SIGNNOW_API_BASIC_TOKEN=${SIGNNOW_API_BASIC_TOKEN:-}
+      - SIGNNOW_API_USERNAME=${SIGNNOW_API_USERNAME:-}
+      - SIGNNOW_API_PASSWORD=${SIGNNOW_API_PASSWORD:-}
+      - SIGNNOW_DOWNLOADS_DIR=${SIGNNOW_DOWNLOADS_DIR:-./downloads}
+    working_dir: /app
+    command: python run_examples.py
+    profiles:
+      - examples
+
+   # Service to run tests
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: signnow-sdk-test
+    volumes:
+      - ./.env:/app/.env:ro
+      - ./downloads:/app/downloads
+      - ./signnow:/app/signnow
+      - ./tests:/app/tests
+      - ./setup.py:/app/setup.py
+      - ./pyproject.toml:/app/pyproject.toml
+      - ./requirements.txt:/app/requirements.txt
+      - ./htmlcov:/app/htmlcov  # For coverage reports
+    working_dir: /app
+    command: pytest tests/ -v
+    profiles:
+      - test
+
+  # Service to run tests with coverage
+  test-cov:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: signnow-sdk-test-cov
+    volumes:
+      - ./.env:/app/.env:ro
+      - ./downloads:/app/downloads
+      - ./signnow:/app/signnow
+      - ./tests:/app/tests
+      - ./setup.py:/app/setup.py
+      - ./pyproject.toml:/app/pyproject.toml
+      - ./requirements.txt:/app/requirements.txt
+      - ./htmlcov:/app/htmlcov
+    working_dir: /app
+    command: pytest tests/ --cov=signnow --cov-report=html --cov-report=term -v
+    profiles:
+      - test
+
+  # Service to run only API call tests
+  test-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: signnow-sdk-test-api
+    volumes:
+      - ./.env:/app/.env:ro
+      - ./downloads:/app/downloads
+      - ./signnow:/app/signnow
+      - ./tests:/app/tests
+      - ./setup.py:/app/setup.py
+      - ./pyproject.toml:/app/pyproject.toml
+      - ./requirements.txt:/app/requirements.txt
+    working_dir: /app
+    command: pytest tests/api/ -k "api_call" -v
+    profiles:
+      - test
