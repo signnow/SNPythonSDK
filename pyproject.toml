@@ -39,9 +39,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/signnow/PythonSdk"
+Homepage = "https://github.com/signnow/SNPythonSDK"
 Documentation = "https://docs.signnow.com"
-Repository = "https://github.com/signnow/PythonSdk"
+Repository = "https://github.com/signnow/SNPythonSDK"
 
 [tool.setuptools.packages.find]
 where = ["."]
