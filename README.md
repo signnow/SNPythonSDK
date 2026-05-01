@@ -1,4 +1,4 @@
-# signNow API Python SDK
+# SignNow API Python SDK
 ## v3.0.0
 
 [![Python Version](https://img.shields.io/badge/codebase-python--3.8+-blue)](https://www.python.org/)
